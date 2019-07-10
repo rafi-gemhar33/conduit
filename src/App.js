@@ -1,14 +1,7 @@
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
-
-import NewArticle from "./Views/newPost";
-import EditUser from "./Views/editUser";
-import RegisterPage from "./Views/registerPage";
-import LoginPage from "./Views/loginPage";
-import { ProtectedRoute } from "./Views/protectedRoute";
-import auth from "./Views/auth";
 
 import "./App.css";
+import { BaseLayout } from "./BaseLayout";
 
 class ShowArticles extends React.Component {
   // return()
@@ -161,7 +154,7 @@ function Pagination() {
     </nav>
   );
 }
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
   render() {
     return (
       <>
@@ -195,67 +188,6 @@ class HomePage extends React.Component {
   }
 }
 
-function Header() {
-  let isLogged = auth.isLogged();
-  return (
-    <header className="base column is-8 is-offset-2">
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <h1 className="title is-3 isPrimary">
-            <Link className="navbar-item green-text" to="/">
-              Conduit
-            </Link>
-          </h1>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-end">
-            <Link className="navbar-item" to="/">
-              Home
-            </Link>
-            {isLogged ? (
-              <>
-                <Link className="navbar-item" to="/newArticle">
-                  New Post
-                </Link>
-                <Link className="navbar-item" to="/editUser">
-                  Settings
-                </Link>
-                <Link className="navbar-item" to="/register">
-                  Account
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="navbar-item" to="/login">
-                  Sign In
-                </Link>
-                <Link className="navbar-item" to="/register">
-                  Sign Up
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-function BaseLayout() {
-  return (
-    <React.Fragment>
-      <Header />
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <ProtectedRoute path="/newArticle" component={NewArticle} />
-        <ProtectedRoute path="/editUser" component={EditUser} />
-      </Switch>
-    </React.Fragment>
-  );
-}
 const App = () => (
   <div className="App">
     <header className="App-header">
