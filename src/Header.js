@@ -14,7 +14,6 @@ export function Header() {
             </Link>
           </h1>
         </div>
-
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-end">
             <NavLink

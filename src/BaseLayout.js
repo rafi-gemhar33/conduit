@@ -6,7 +6,7 @@ import RegisterPage from "./Views/registerPage";
 import LoginPage from "./Views/loginPage";
 import { ProtectedRoute } from "./Views/protectedRoute";
 import { Header } from "./Header";
-import { HomePage } from "./App";
+import { HomePage } from "./HomePage";
 
 export function BaseLayout() {
   return (
