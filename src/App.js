@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 
 import NewArticle from "./Views/newPost";
 import EditUser from "./Views/editUser";
@@ -244,32 +244,24 @@ function Header() {
 
 function BaseLayout() {
   return (
-    <div>
+    <React.Fragment>
       <Header />
-      <div className="">
+      <Switch>
         <Route path="/" exact component={HomePage} />
-
-        <div className="column is-8 is-offset-2">
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <ProtectedRoute path="/newArticle" component={NewArticle} />
-          <ProtectedRoute path="/editUser" component={EditUser} />
-        </div>
-      </div>
-    </div>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
+        <ProtectedRoute path="/newArticle" component={NewArticle} />
+        <ProtectedRoute path="/editUser" component={EditUser} />
+      </Switch>
+    </React.Fragment>
   );
 }
-
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <BaseLayout />
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <BaseLayout />
+    </header>
+  </div>
+);
 
 export default App;
