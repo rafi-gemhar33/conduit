@@ -1,12 +1,14 @@
-export default function postData(url = '', data = {}) {
+export default function customFetch(url = '', data = {}, token="", method="POST") {
     // Default options are marked with *
       return fetch(url, {
-          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          method: method, // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, cors, *same-origin
           cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
           credentials: 'same-origin', // include, *same-origin, omit
           headers: {
-              'Content-Type': 'application/json',
+            'Authorization' : token,
+            'Content-Type': 'application/json',
+              
               // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           redirect: 'follow', // manual, *follow, error
