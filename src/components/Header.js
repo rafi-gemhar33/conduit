@@ -1,20 +1,10 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, withRouter} from "react-router-dom";
 import auth from "./auth";
 
- export class Header extends React.Component {
-
-  state = {
-    islogged: auth.isLogged()
-  }
-
-  componentDidMount(){
-    this.setState({islogged: auth.isLogged()});
-  }
-
+class Header extends React.Component {
 
   render() {
-      // console.log("Yello, im in header render");
       
       const userData = JSON.parse(localStorage.getItem("userData"));
       const user = userData && userData.user ; 
@@ -39,7 +29,7 @@ import auth from "./auth";
               >
                 Home
               </NavLink>
-              {this.state.islogged ? (
+              {auth.isLogged() ? (
                 <>
                   <NavLink
                     exact
@@ -101,3 +91,5 @@ import auth from "./auth";
     )
   }
 }
+
+export default withRouter(Header)

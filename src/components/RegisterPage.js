@@ -35,7 +35,7 @@ export default class RegisterPage extends React.Component {
       .then(userData => {
         if(!userData.errors){
 
-          localStorage.setItem('currentUser', JSON.stringify({ token: userData.user.token }))
+          localStorage.setItem('currentUser', userData.user.token)
           localStorage.setItem('userData', JSON.stringify(userData))
           
           if(auth.isLogged()) {

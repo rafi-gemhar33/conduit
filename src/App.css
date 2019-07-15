@@ -10,6 +10,11 @@
     color: #22CF5E;
 }
 
+.hero.is-success .header-title {
+    font-size: 4rem;
+    font-weight: 900;
+}
+
 .sign-header {
     text-align: center;
     margin-bottom: 15px;
@@ -96,4 +101,11 @@
 
 .thin-text {
     font-weight: lighter;
+}
+.tag-container{
+    background: rgba(241, 241, 241, 0.651);
+}
+.page-number {
+    border: 1px solid gainsboro;
+    background: white;
 }

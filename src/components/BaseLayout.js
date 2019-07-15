@@ -5,7 +5,7 @@ import EditUser from "./EditUser";
 import RegisterPage from "./RegisterPage";
 import LoginPage from "./LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
-import { Header } from "./Header";
+import Header from "./Header";
 import { HomePage } from "./HomePage";
 import Article from "./Article";
 import Profile from "./Profile";

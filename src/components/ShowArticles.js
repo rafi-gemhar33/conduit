@@ -7,35 +7,9 @@ import auth from './auth';
 
 export class ShowArticles extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      articles: [],
-      isLoading: false
-    };
-  }
-
-  componentDidMount() {
-    this.fetchArticles();
-  }
-
-  fetchArticles = () => {
-    this.setState({ isLoading: true });
-    fetch("https://conduit.productionready.io/api/articles?limit=10&offset=0")
-      .then(res => res.json())
-      .then(data => {
-        let newArr = this.state.articles.concat(data.articles);
-        this.setState({ articles: newArr, isLoading: false });
-      })
-      .catch(error => console.error(error));
-  }
-  
-
   render() {
-    const { isLoading, articles } = this.state;
-    return isLoading ? (
-      <p>Loading...</p>
-    ) : (
+    const { articles } = this.props;
+    return (
       <>
         {articles.map((article, i) => {
           return (

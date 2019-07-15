@@ -15,6 +15,11 @@ export default function customFetch(url = '', data = {}, token="", method="POST"
           referrer: 'no-referrer', // no-referrer, *client
           body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
-      .then(response => response.json()); // parses JSON response into native JavaScript objects 
+      .then(res => {
+        if(res.status !== 200){
+          console.log("fetch fail" );
+        } else {
+          return res.json();
+        }
+      })
   }
-  

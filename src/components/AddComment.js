@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import auth from "./auth";
-import customFetch from '../customFetch'
-import ShowComments from './ShowComments'
+import customFetch from '../customFetch';
+import ShowComments from './ShowComments';
 
 export default class AddComment extends React.Component {
 
@@ -40,7 +40,6 @@ export default class AddComment extends React.Component {
             customFetch(url, data, token)
             .then(commetData => {
                 if(!commetData.errors){
-                //   console.log(commetData);
                     this.fetchAllComments();
                 } else {
                   this.setState({ message: "Something went wrong"});
@@ -59,16 +58,11 @@ export default class AddComment extends React.Component {
         fetch(url)
         .then(response => response.json())
         .then(commetData => {
-            // console.log(commetData);
-            
             if(!commetData.errors){
                 this.setState({ 
                     comments: commetData.comments,
                     comment: ""
                 })
-              } else {
-                //   console.log("somethingwentwrong");
-                // this.setState({ message: "somethingwentwrong"});
               }
         })
         .catch(error => console.error(error));
@@ -130,9 +124,9 @@ export default class AddComment extends React.Component {
         :
         (
             <p className="help is-medium">
-            <Link className="subtitle green-text" to='/login'> Sign In </Link>
+            <Link className="green-text" to='/login'> Sign In </Link>
               or 
-            <Link className="subtitle green-text" to='/register'> Sign Up </Link>
+            <Link className="green-text" to='/register'> Sign Up </Link>
               to add comments</p>
         )
     }

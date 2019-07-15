@@ -4,18 +4,23 @@ import { ShowArticles } from "./ShowArticles";
 import { ShowTab } from "./ShowTab";
 import auth from './auth';
 import customFetch from '../customFetch';
-
+import { Pagination } from "./Pagination";
 
 export default class Profile extends React.Component {
     constructor(props){
         super(props);
         
         this.state = {
-            profile: {}
+            profile: {},
+            articles: [],
+            articlesCount:0,
+            page: 1,
+            isLoading: false,
+            initailTab: "myFeed",
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const username = this.props.location.state && this.props.location.state.username;
         const profileAPI = `https://conduit.productionready.io/api/profiles/${username}`
         fetch(profileAPI)
@@ -25,17 +30,50 @@ export default class Profile extends React.Component {
           this.setState({ profile: newProfile });
         })
         .catch(error => console.error(error));
+
+        this.fetchArticles();
     }
+
+    fetchArticles = (filter={}) => {
+      let { author, favorited, offset} = filter;
+      author = author || (this.props.location.state && this.props.location.state.username);  
+              
+        const URL = `https://conduit.productionready.io/api/articles?limit=10&offset=${offset || "0"}&author=${author || "" }&favorited=${favorited || ""}`;
+
+        fetch(URL)
+          .then(res => res.json())
+          .then(data => {
+            const {articles, articlesCount} = data;
+            this.setState({ articles, articlesCount, isLoading: false });
+          })
+          .catch(error => console.error(error));
+      }
 
     editProfile = () => {
         this.props.history.push("/editUser")
     }
 
-    followUser = () => {
-
+    handleTab = (tab) => {
+      this.setState({initailTab:tab})
+      const {profile: {username}} = this.state
+      switch (tab) {
+        case "myFeed":
+          this.fetchArticles({author: username});
+          break;
+        case "favorites":
+          this.fetchArticles({favorited: username});
+          break;      
+        default:
+          break;
+      }
     }
+
+    setPage = (page) => {
+      this.setState({page});
+    }
+
     render() {
-        const profile = this.state.profile;
+        const {articles, isLoading, profile, articlesCount, page, initailTab} = this.state
         const userData = JSON.parse(localStorage.getItem("userData"));
         const currentUser = (userData && userData.user && userData.user.username) || ""; 
 
@@ -74,15 +112,15 @@ export default class Profile extends React.Component {
                 </section>
                 
                 <div className="base column is-8 is-offset-2">
-                    <ShowTab />
-                    <ShowArticles />
+                    <ShowTab initailTab={initailTab} profile="profile" changeTab={this.handleTab}/>
+                    <ShowArticles articles={articles} isLoading={isLoading}/>
+                    <Pagination count={articlesCount} filterByPage={this.fetchArticles} setPage={this.setPage} page={page}/>
+
                 </div>
             </React.Fragment>
             )
     }
 }
-
-// this.state.profile
 
 class FollowButton extends React.Component {
     constructor(props){
@@ -102,7 +140,6 @@ class FollowButton extends React.Component {
       customFetch(url, null, token, method)
       .then(data => {
         if(!data.errors) {
-            console.log(data);
             
           const {following} = data.profile;
           this.setState({following})

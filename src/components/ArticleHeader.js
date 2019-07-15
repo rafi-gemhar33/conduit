@@ -19,9 +19,7 @@ class ArticleHeader extends React.Component {
             const url = `https://conduit.productionready.io/api/articles/${slug}`
             customFetch(url, null, token, "DELETE")
             .then(data => {
-                console.log(data);
                 if(!data.errors){
-                    console.log(data);
                     this.props.history.push("/");
                 } else {
                     this.setState({ message: "Something went wrong"});

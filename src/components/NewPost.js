@@ -42,7 +42,7 @@ export default class NewArticle extends React.Component {
 
   publish = () => {
     const tagList = this.state.tagList.split(",").map(tag => tag.trim());
-    const{title, description, body} = this.state;
+    const{title, description, body, slug} = this.state;
     if(title.length>1 && description.length>1 && body.length>1) {
       const articleData = {
         article: {
@@ -52,9 +52,9 @@ export default class NewArticle extends React.Component {
           tagList
         }
       }
-      const token = `Token ${auth.getToken()}`
-      const createArticleAPI = "https://conduit.productionready.io/api/articles";
+      const token = `Token ${auth.getToken()}`;   
       const method = this.state.isUpdating ? "PUT" : "POST";
+      const createArticleAPI = `https://conduit.productionready.io/api/articles${this.state.isUpdating ?`/${slug}` : ""}`;
 
       customFetch( createArticleAPI, articleData, token, method)
       .then(articleData => {

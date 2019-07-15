@@ -8,6 +8,7 @@ class Auth {
       const token = userData && userData.user && userData.user.token; 
 
       return token ? true : false;
+      
     }
   
     getToken() {

@@ -3,6 +3,8 @@ import React from 'react';
 import customFetch from '../customFetch';
 import auth from './auth';
 
+// import {UserContext} from '../App';
+
 export default class EditUser extends React.Component {
   constructor(){
     super();
