@@ -6,6 +6,9 @@
 .article-teaser{
     margin-bottom: 5px;
 }
+.navbar .logo {
+    margin-bottom: 0;
+}
 .green-text {
     color: #22CF5E;
 }
