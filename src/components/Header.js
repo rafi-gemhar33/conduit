@@ -5,6 +5,7 @@ import auth from "./auth";
 class Header extends React.Component {
 
   render() {
+      console.log(typeof localStorage.getItem("userData"));
       
       const userData = JSON.parse(localStorage.getItem("userData"));
       const user = userData && userData.user ; 
