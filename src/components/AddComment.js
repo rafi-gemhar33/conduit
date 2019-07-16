@@ -87,6 +87,8 @@ export default class AddComment extends React.Component {
     }
 
     render() {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        const currentUser = (userData && userData.user) || {}; 
         return auth.isLogged() ? 
         (
             <>
@@ -100,9 +102,9 @@ export default class AddComment extends React.Component {
                         <nav className="level comment-footer">
                             <div className="level-left">
                                 <div className="media commnet-media">
-                                    <div className="media-left">
-                                        <figure className="image is-32x32">
-                                            <img className=" is-responsive is-rounded" src="" alt="" />
+                                    <div className="media-left v-center">
+                                        <figure className="  image is-32x32">
+                                            <img className=" is-responsive is-rounded" src={currentUser.image || "https://bulma.io/images/placeholders/32x32.png"} alt="author avatar" />
                                         </figure>
                                     </div>
                                 </div>

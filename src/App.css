@@ -60,6 +60,7 @@
 }
 .media .commnet-media {
     border: none;
+    padding: .5rem 0;
 }
 .comment-box{
     border: 1px solid darkgray !important;
@@ -108,4 +109,8 @@
 .page-number {
     border: 1px solid gainsboro;
     background: white;
+}
+
+.comment-user {
+    margin-right: 10px;
 }

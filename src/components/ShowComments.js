@@ -28,8 +28,8 @@ export default class ShowComments extends React.Component {
                                 <div className="level-left">
                                     <div className="media commnet-media">
                                         <div className="media-left">
-                                            <figure className="image is-32x32">
-                                                <img className=" is-responsive is-rounded" src={author.image || "https://bulma.io/images/placeholders/96x96.png"} alt="author avatar" />
+                                            <figure className="v-center image is-32x32">
+                                                <img className=" is-responsive is-rounded" src={author.image || "https://bulma.io/images/placeholders/32x32.png"} alt="author avatar" />
                                             </figure>
                                         </div>
                                         <div className="v-center media-content is-small">
@@ -38,7 +38,8 @@ export default class ShowComments extends React.Component {
                                                     state: {
                                                         username: author.username
                                                     }
-                                                    }} className="green-text">
+                                                    }} 
+                                                    className="green-text comment-user">
                                                 <span className="green-text">
                                                     {author.username}
                                                 </span>
