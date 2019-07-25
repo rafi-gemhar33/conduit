@@ -40,6 +40,11 @@ export class HomePage extends React.Component {
 				.then(res => res.json())
 				.then(data => {
 					const { articles, articlesCount } = data;
+
+					articles.forEach(e => {
+						console.log("fetching Articles", e.favoritesCount);
+					})
+					
 					this.setState({ articles, articlesCount, isLoading: false });
 				})
 				.catch(error => console.error(error));

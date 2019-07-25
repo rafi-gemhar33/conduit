@@ -76,20 +76,22 @@ class ArticleLike extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			likes: props.article.favoritesCount,
-			fav: props.article.favorited
+			likes: -1,
+			fav: -1,
 		};
 	}
 
-	clickLike(slug, fav) {
+	clickLike(slug) {
+		const modeFlag = this.state.fav===-1 ? this.props.article.favorited : this.state.fav
 		const url = `https://conduit.productionready.io/api/articles/${slug}/favorite`;
-		const mode = this.state.fav ? "DELETE" : "POST";
+		const mode = modeFlag ? "DELETE" : "POST";
 		const token = `Token ${auth.getToken()}`;
 
 		customFetch(url, null, token, mode)
 			.then(data => {
 				if (!data.errors) {
 					const { favoritesCount, favorited } = data.article;
+					
 					this.setState({ likes: favoritesCount, fav: favorited });
 				} else {
 					this.setState({ message: "email or password is invalid" });
@@ -99,6 +101,7 @@ class ArticleLike extends React.Component {
 	}
 
 	render() {
+		console.log("likes: ",this.props.article.favoritesCount);
 		const { slug, favorited } = this.props.article;
 		return (
 			<button
@@ -108,7 +111,7 @@ class ArticleLike extends React.Component {
 				<span className="icon is-small">
 					<i className="fas fa-heart" />
 				</span>
-				<span>{this.state.likes}</span>
+				<span>{this.state.likes===-1?this.props.article.favoritesCount : this.state.likes}</span>
 			</button>
 		);
 	}

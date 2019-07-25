@@ -12,7 +12,7 @@ export class Pagination extends React.Component {
 		const offset = (currentPage - 1) * 10;
 		this.props.filterByPage({ offset });
 		this.props.setPage(currentPage);
-		this.setState({ currentPage });
+		this.setState({ currentPage }); 
 	}
 
 	render() {

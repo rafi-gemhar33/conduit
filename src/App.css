@@ -23,6 +23,10 @@
     margin-bottom: 15px;
 }
 
+.header-author:hover { 
+    color: rgba(34, 207, 95, 0.596)
+}
+
 .hero-container {
     text-align: center;
 }
