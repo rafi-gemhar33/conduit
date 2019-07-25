@@ -82,6 +82,8 @@ class ArticleLike extends React.Component {
 	}
 
 	clickLike(slug) {
+		console.log("bulb");
+		
 		const modeFlag = this.state.fav===-1 ? this.props.article.favorited : this.state.fav
 		const url = `https://conduit.productionready.io/api/articles/${slug}/favorite`;
 		const mode = modeFlag ? "DELETE" : "POST";
@@ -91,7 +93,6 @@ class ArticleLike extends React.Component {
 			.then(data => {
 				if (!data.errors) {
 					const { favoritesCount, favorited } = data.article;
-					
 					this.setState({ likes: favoritesCount, fav: favorited });
 				} else {
 					this.setState({ message: "email or password is invalid" });
@@ -101,8 +102,8 @@ class ArticleLike extends React.Component {
 	}
 
 	render() {
-		console.log("likes: ",this.props.article.favoritesCount);
 		const { slug, favorited } = this.props.article;
+		console.log(this.state.likes)
 		return (
 			<button
 				onClick={() => this.clickLike(slug, favorited)}

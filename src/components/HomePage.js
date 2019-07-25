@@ -17,6 +17,7 @@ export class HomePage extends React.Component {
 			initailTab: "globalFeed"
 		};
 		this.isYourFeed = false;
+		this.urlItem = {};
 	}
 
 	componentDidMount() {
@@ -24,7 +25,8 @@ export class HomePage extends React.Component {
 	}
 
 	fetchArticles = (filter = {}) => {
-		const { tag, author, favorited, offset } = filter;
+
+		const { tag, author, favorited, offset } = Object.assign(this.urlItem, filter);
 
 		if (!this.isYourFeed) {
 			const URL = `https://conduit.productionready.io/api/articles?limit=10&offset=${offset ||
@@ -39,12 +41,7 @@ export class HomePage extends React.Component {
 			fetch(URL)
 				.then(res => res.json())
 				.then(data => {
-					const { articles, articlesCount } = data;
-
-					articles.forEach(e => {
-						console.log("fetching Articles", e.favoritesCount);
-					})
-					
+					const { articles, articlesCount } = data;					
 					this.setState({ articles, articlesCount, isLoading: false });
 				})
 				.catch(error => console.error(error));
@@ -77,8 +74,13 @@ export class HomePage extends React.Component {
 
 	filterByItem = item => {
 		this.isYourFeed = false;
+		this.urlItem = item;
 		this.fetchArticles(item);
 	};
+
+	filterByPage = offset => {
+
+	}
 
 	setPage = page => {
 		this.setState({ page });
@@ -93,10 +95,11 @@ export class HomePage extends React.Component {
 		switch (tab) {
 			case "yourFeed":
 				this.isYourFeed = true;
+				this.urlItem = {};
 				this.fetchArticles();
 				break;
 			case "globalFeed":
-				this.filterByItem();
+				this.filterByItem({});
 				break;
 			case "tagFeed":
 				this.filterByItem({ tag: this.state.tag });
