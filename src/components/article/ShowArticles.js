@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import customFetch from "../customFetch";
-import auth from "./auth";
+import customFetch from "../../utils/customFetch";
+import auth from "../../utils/auth";
 // import Article from "./Article";
 
 export class ShowArticles extends React.Component {
@@ -76,14 +76,17 @@ class ArticleLike extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			likes: props.article.favoritesCount,
-			fav: props.article.favorited
+			likes: -1,
+			fav: -1,
 		};
 	}
 
-	clickLike(slug, fav) {
+	clickLike(slug) {
+		console.log("bulb");
+		
+		const modeFlag = this.state.fav===-1 ? this.props.article.favorited : this.state.fav
 		const url = `https://conduit.productionready.io/api/articles/${slug}/favorite`;
-		const mode = this.state.fav ? "DELETE" : "POST";
+		const mode = modeFlag ? "DELETE" : "POST";
 		const token = `Token ${auth.getToken()}`;
 
 		customFetch(url, null, token, mode)
@@ -100,6 +103,7 @@ class ArticleLike extends React.Component {
 
 	render() {
 		const { slug, favorited } = this.props.article;
+		console.log(this.state.likes)
 		return (
 			<button
 				onClick={() => this.clickLike(slug, favorited)}
@@ -108,7 +112,7 @@ class ArticleLike extends React.Component {
 				<span className="icon is-small">
 					<i className="fas fa-heart" />
 				</span>
-				<span>{this.state.likes}</span>
+				<span>{this.state.likes===-1?this.props.article.favoritesCount : this.state.likes}</span>
 			</button>
 		);
 	}

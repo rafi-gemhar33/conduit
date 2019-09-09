@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import "./App.css";
-import { BaseLayout } from "./components/BaseLayout";
+import { BaseLayout } from "./components/layout/BaseLayout";
 
 export const UserContext = React.createContext({});
 
@@ -33,7 +33,7 @@ class App extends React.Component {
 				}
 			})
 			.then(user => {
-				if (!user.errors) {
+				if (user && !user.errors) {
 					this.setState({ loggedUser: user });
 				} else {
 					console.log("somethingwentwrong");

@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ShowArticles } from "./ShowArticles";
-import { ShowTab } from "./ShowTab";
-import auth from "./auth";
-import customFetch from "../customFetch";
-import { Pagination } from "./Pagination";
+import { ShowArticles } from "../article/ShowArticles";
+import { ShowTab } from "../filters/ShowTab";
+import auth from "../../utils/auth";
+import customFetch from "../../utils/customFetch";
+import { Pagination } from "../filters/Pagination";
 
 export default class Profile extends React.Component {
 	constructor(props) {
@@ -21,6 +21,7 @@ export default class Profile extends React.Component {
 	}
 
 	componentDidMount() {
+		
 		const username =
 			this.props.location.state && this.props.location.state.username;
 		const profileAPI = `https://conduit.productionready.io/api/profiles/${username}`;
@@ -32,15 +33,14 @@ export default class Profile extends React.Component {
 			})
 			.catch(error => console.error(error));
 
-		this.fetchArticles();
+		const	author = this.props.location.state && this.props.location.state.username;
+
+
+		this.fetchArticles({author});
 	}
 
 	fetchArticles = (filter = {}) => {
 		let { author, favorited, offset } = filter;
-		author =
-			author ||
-			(this.props.location.state && this.props.location.state.username);
-
 		const URL = `https://conduit.productionready.io/api/articles?limit=10&offset=${offset ||
 			"0"}&author=${author || ""}&favorited=${favorited || ""}`;
 
@@ -67,6 +67,8 @@ export default class Profile extends React.Component {
 				this.fetchArticles({ author: username });
 				break;
 			case "favorites":
+				console.log("fava");
+				
 				this.fetchArticles({ favorited: username });
 				break;
 			default:

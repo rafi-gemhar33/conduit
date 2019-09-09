@@ -1,8 +1,8 @@
 import React from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, Link} from "react-router-dom";
 
-import customFetch from "../customFetch";
-import auth from "./auth";
+import customFetch from "../../utils/customFetch";
+import auth from "../../utils/auth";
 
 class ArticleHeader extends React.Component {
 	state = {
@@ -69,8 +69,31 @@ class ArticleHeader extends React.Component {
 									/>
 								</figure>
 							</div>
+							{/* <Link
+								to={{
+									pathname: "/profile",
+									state: {
+										username: authorName
+									}
+								}}
+								className="green-text"
+							>
+								{authorName}
+							</Link> */}
 							<div className="media-content is-small">
-								<p className="title is-5">{authorName}</p>
+								<p className="title is-5">
+								<Link
+								to={{
+									pathname: "/profile",
+									state: {
+										username: authorName
+									}
+								}}
+								className="header-author green-text"
+							>
+								{authorName}
+							</Link>
+							</p>
 								<p className="subtitle is-6 thin-text">
 									<em>{dateInformat}</em>
 								</p>

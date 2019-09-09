@@ -1,6 +1,6 @@
 import React from "react";
 
-import AddComment from "./AddComment";
+import AddComment from "../comment/AddComment";
 import ArticleHeader from "./ArticleHeader";
 
 export default class Article extends React.Component {

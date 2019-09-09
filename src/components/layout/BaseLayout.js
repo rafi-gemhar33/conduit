@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import NewArticle from "./NewPost";
-import EditUser from "./EditUser";
-import RegisterPage from "./RegisterPage";
-import LoginPage from "./LoginPage";
-import { ProtectedRoute } from "./ProtectedRoute";
+import NewArticle from "../article/NewArticle";
+import EditUser from "../user/EditUser";
+import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
+import { ProtectedRoute } from "../ProtectedRoute";
 import Header from "./Header";
-import { HomePage } from "./HomePage";
-import Article from "./Article";
-import Profile from "./Profile";
+import { HomePage } from "../pages/HomePage";
+import Article from "../article/Article";
+import Profile from "../user/Profile";
 
 export function BaseLayout() {
 	return (
