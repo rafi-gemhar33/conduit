@@ -1,10 +1,7 @@
-download or clone the repository:
+download or clone the repository.
+
 npm install
-
 for dependencies
-
-concurrently running backend and json-server
-
 Runs the app with http://localhost:3000 
 
 ## CONDUIT:
