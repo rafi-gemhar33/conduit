@@ -33,7 +33,7 @@ class App extends React.Component {
 				}
 			})
 			.then(user => {
-				if (!user.errors) {
+				if (user && !user.errors) {
 					this.setState({ loggedUser: user });
 				} else {
 					console.log("somethingwentwrong");
