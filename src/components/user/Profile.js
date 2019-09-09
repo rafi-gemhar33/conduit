@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ShowArticles } from "./ShowArticles";
-import { ShowTab } from "./ShowTab";
-import auth from "./auth";
-import customFetch from "../customFetch";
-import { Pagination } from "./Pagination";
+import { ShowArticles } from "../article/ShowArticles";
+import { ShowTab } from "../filters/ShowTab";
+import auth from "../../utils/auth";
+import customFetch from "../../utils/customFetch";
+import { Pagination } from "../filters/Pagination";
 
 export default class Profile extends React.Component {
 	constructor(props) {

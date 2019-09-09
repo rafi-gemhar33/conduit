@@ -1,7 +1,7 @@
 import React from "react";
 
-import customFetch from "../customFetch";
-import auth from "./auth";
+import customFetch from "../../utils/customFetch";
+import auth from "../../utils/auth";
 
 // import {UserContext} from '../App';
 

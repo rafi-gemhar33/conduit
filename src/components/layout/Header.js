@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink, withRouter } from "react-router-dom";
-import auth from "./auth";
+import auth from "../../utils/auth";
 
 class Header extends React.Component {
 	render() {
@@ -19,7 +19,7 @@ class Header extends React.Component {
 
 						<a
 							role="button"
-							class="navbar-burger burger"
+							className="navbar-burger burger"
 							aria-label="menu"
 							aria-expanded="false"
 							data-target="navbarBasicExample"
@@ -32,7 +32,7 @@ class Header extends React.Component {
 
 					<div id="navbarBasicExample" className="navbar-menu">
 						<div className="navbar-end">
-							<div class="navbar-item ">
+							<div className="navbar-item ">
 								<NavLink
 									exact
 									className="navbar-item"

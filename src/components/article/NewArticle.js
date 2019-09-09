@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-import customFetch from "../customFetch";
-import auth from "./auth";
+import customFetch from "../../utils/customFetch";
+import auth from "../../utils/auth";
 
 export default class NewArticle extends React.Component {
 	constructor(props) {

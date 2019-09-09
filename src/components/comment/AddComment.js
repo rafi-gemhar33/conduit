@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import auth from "./auth";
-import customFetch from "../customFetch";
+import auth from "../../utils/auth";
+import customFetch from "../../utils/customFetch";
 import ShowComments from "./ShowComments";
 
 export default class AddComment extends React.Component {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import auth from "./auth";
+import auth from "../../utils/auth";
 
 export class ShowTab extends React.Component {
 	constructor(props) {

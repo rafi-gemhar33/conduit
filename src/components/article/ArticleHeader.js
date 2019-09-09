@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter, Redirect, Link} from "react-router-dom";
 
-import customFetch from "../customFetch";
-import auth from "./auth";
+import customFetch from "../../utils/customFetch";
+import auth from "../../utils/auth";
 
 class ArticleHeader extends React.Component {
 	state = {

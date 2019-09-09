@@ -1,9 +1,9 @@
-import React from "react";
-import { ShowTags } from "./ShowTags";
-import { ShowArticles } from "./ShowArticles";
-import { ShowTab } from "./ShowTab";
-import { Pagination } from "./Pagination";
-import auth from "./auth";
+import React from 'react';
+import { ShowTags } from '../filters/ShowTags';
+import { ShowArticles } from '../article/ShowArticles';
+import { ShowTab } from '../filters/ShowTab';
+import { Pagination } from '../filters/Pagination';
+import auth from '../../utils/auth';
 
 export class HomePage extends React.Component {
 	constructor(props) {
@@ -11,10 +11,10 @@ export class HomePage extends React.Component {
 		this.state = {
 			articles: [],
 			isLoading: false,
-			tag: "",
+			tag: '',
 			articlesCount: 0,
 			page: 1,
-			initailTab: "globalFeed"
+			initailTab: 'globalFeed',
 		};
 		this.isYourFeed = false;
 		this.urlItem = {};
@@ -25,43 +25,40 @@ export class HomePage extends React.Component {
 	}
 
 	fetchArticles = (filter = {}) => {
-
-		const { tag, author, favorited, offset } = Object.assign(this.urlItem, filter);
+		const { tag, author, favorited, offset } = Object.assign(
+			this.urlItem,
+			filter
+		);
 
 		if (!this.isYourFeed) {
 			const URL = `https://conduit.productionready.io/api/articles?limit=10&offset=${offset ||
-				"0"}&tag=${tag || ""}&author=${author || ""}&favorited=${favorited ||
-				""}`;
+				'0'}&tag=${tag || ''}&author=${author || ''}&favorited=${favorited ||
+				''}`;
 
-			// https://conduit.productionready.io/api/articles?tag=butt&limit=10&offset=0
-			// https://conduit.productionready.io/api/articles?tag=butt&limit=10&offset=0
-			// &author=${author || ""}&favorited=${favorited || ""}
-
-			// this.setState({ isLoading: true });
 			fetch(URL)
 				.then(res => res.json())
 				.then(data => {
-					const { articles, articlesCount } = data;					
+					const { articles, articlesCount } = data;
 					this.setState({ articles, articlesCount, isLoading: false });
 				})
 				.catch(error => console.error(error));
 		} else {
 			const URL = `https://conduit.productionready.io/api/articles/feed?limit=10&offset=${offset ||
-				"0"}`;
+				'0'}`;
 			const token = `Token ${auth.getToken()}`;
 
 			fetch(URL, {
-				method: "GET",
-				mode: "cors",
-				cache: "no-cache",
-				credentials: "same-origin",
+				method: 'GET',
+				mode: 'cors',
+				cache: 'no-cache',
+				credentials: 'same-origin',
 				headers: {
 					Authorization: token,
-					"Content-Type": "application/json"
+					'Content-Type': 'application/json',
 					// 'Content-Type': 'application/x-www-form-urlencoded',
 				},
-				redirect: "follow", // manual, *follow, error
-				referrer: "no-referrer" // no-referrer, *client
+				redirect: 'follow', // manual, *follow, error
+				referrer: 'no-referrer', // no-referrer, *client
 			})
 				.then(response => response.json())
 				.then(data => {
@@ -78,30 +75,28 @@ export class HomePage extends React.Component {
 		this.fetchArticles(item);
 	};
 
-	filterByPage = offset => {
-
-	}
+	filterByPage = offset => {};
 
 	setPage = page => {
 		this.setState({ page });
 	};
 
 	setTag = tag => {
-		this.setState({ tag, initailTab: "tagFeed", isYourFeed: false });
+		this.setState({ tag, initailTab: 'tagFeed', isYourFeed: false });
 	};
 
 	handleTab = tab => {
 		this.setState({ initailTab: tab });
 		switch (tab) {
-			case "yourFeed":
+			case 'yourFeed':
 				this.isYourFeed = true;
 				this.urlItem = {};
 				this.fetchArticles();
 				break;
-			case "globalFeed":
+			case 'globalFeed':
 				this.filterByItem({});
 				break;
-			case "tagFeed":
+			case 'tagFeed':
 				this.filterByItem({ tag: this.state.tag });
 				break;
 
@@ -117,7 +112,7 @@ export class HomePage extends React.Component {
 			page,
 			tag,
 			articlesCount,
-			initailTab
+			initailTab,
 		} = this.state;
 
 		return (
@@ -127,7 +122,7 @@ export class HomePage extends React.Component {
 						<div className="container hero-container">
 							<h1 className="header-title title is-1">conduit </h1>
 							<h2 className="subtitle is-4">
-								{" "}
+								{' '}
 								A place to share your knowledge.
 							</h2>
 						</div>
